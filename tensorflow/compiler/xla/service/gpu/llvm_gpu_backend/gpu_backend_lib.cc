@@ -796,7 +796,8 @@ Status AMDGPUTargetModuleLinker(llvm::Module* module, GpuVersion gpu_version,
                                           device_bitcode_dir_path));
 
   // If ftz is enabled, set it as an attribute on every function in the module.
-  if (hlo_module_config.debug_options().xla_gpu_ftz()) {
+  //if (hlo_module_config.debug_options().xla_gpu_ftz()) {
+  if (1) {
     for (llvm::Function& fn : *module) {
       fn.addFnAttr("denormal-fp-math-f32", "preserve-sign");
     }
