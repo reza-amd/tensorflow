@@ -361,6 +361,8 @@ static void AllocateFlags() {
       flag_values->xla_gpu_ftz(),
       "If true, flush-to-zero semantics are enabled in the code generated for "
       "GPUs."));
+      std::cout << "REZA: this is the value of flag_values->xla_gpu_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << flag_values->xla_gpu_ftz() << std::endl;
   flag_objects->push_back(tensorflow::Flag(
       "xla_gpu_disable_multi_streaming",
       bool_setter_for(&DebugOptions::set_xla_gpu_disable_multi_streaming),

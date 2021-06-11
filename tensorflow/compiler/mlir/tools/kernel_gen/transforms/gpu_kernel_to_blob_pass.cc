@@ -53,6 +53,9 @@ class GpuKernelToBlobPass
   GpuKernelToBlobPass(mlir::StringRef blob_annotation,
                       llvm::ArrayRef<std::string> architectures,
                       bool generate_fatbin, bool print_ptx, bool enable_ftz) {
+    std::cout << "REZA: this is the value of enable_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << enable_ftz << std::endl;
+
     if (!blob_annotation.empty()) {
       blob_annotation_ = blob_annotation.str();
     }
@@ -100,6 +103,8 @@ class GpuKernelToBlobPass
 
     xla::HloModuleConfig config;
     xla::DebugOptions options = xla::GetDebugOptionsFromFlags();
+    std::cout << "REZA: this is the value of enable_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << enable_ftz_ << std::endl;
     options.set_xla_gpu_ftz(enable_ftz_);
     config.set_debug_options(options);
 
@@ -151,6 +156,8 @@ class GpuKernelToBlobPass
 
     xla::HloModuleConfig config;
     xla::DebugOptions options = xla::GetDebugOptionsFromFlags();
+    std::cout << "REZA: this is the value of enable_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << enable_ftz_ << std::endl;
     options.set_xla_gpu_ftz(enable_ftz_);
     // Make sure we use full precision division operations.
     (*options.mutable_xla_backend_extra_options())["-nvptx-prec-divf32"] = "2";
@@ -254,6 +261,8 @@ class GpuKernelToBlobPass
 std::unique_ptr<OperationPass<gpu::GPUModuleOp>> CreateGpuKernelToBlobPass(
     mlir::StringRef blob_annotation, ArrayRef<std::string> architectures,
     bool generate_fatbin, bool print_ptx, bool enable_ftz) {
+  std::cout << "REZA: this is the value of enable_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << enable_ftz << std::endl;    
   return std::make_unique<GpuKernelToBlobPass>(
       blob_annotation, architectures, generate_fatbin, print_ptx, enable_ftz);
 }

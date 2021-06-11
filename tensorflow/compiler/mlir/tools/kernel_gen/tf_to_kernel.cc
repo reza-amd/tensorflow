@@ -110,6 +110,8 @@ xla::Status Run(llvm::StringRef input_file, llvm::StringRef output_file,
                 llvm::ArrayRef<int64_t> unroll_factors,
                 bool embed_memref_prints, bool print_ptx, bool enable_ftz,
                 bool cpu_codegen) {
+  std::cout << "REZA: this is the value of enable_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << enable_ftz << std::endl;                    
   // Read TF code.
   std::string tf_code;
   TF_RETURN_IF_ERROR(
@@ -176,6 +178,8 @@ int main(int argc, char** argv) {
   mlir::registerMLIRContextCLOptions();
   llvm::cl::ParseCommandLineOptions(argc, argv, "TF op kernel generator\n");
 
+  std::cout << "REZA: this is the value of enable_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << enable_ftz << std::endl;
   auto status = tensorflow::kernel_gen::Run(
       input_file, output_file, architectures, tile_sizes, unroll_factors,
       embed_memref_prints, print_ptx, enable_ftz, cpu_codegen);

@@ -349,10 +349,18 @@ Status NVPTXTargetModuleLinker(llvm::Module* module, GpuVersion gpu_version,
 
   // Set the flush-denormals-to-zero flag on the module so the NVVM reflect pass
   // can access it.
+  std::cout << "REZA: this is the value of "
+               "nvvm-reflect-ftz in "
+            << __FILE__ << "::" << __FUNCTION__
+            << hlo_module_config.debug_options().xla_gpu_ftz() << std::endl;
   module->addModuleFlag(llvm::Module::Override, "nvvm-reflect-ftz",
                         hlo_module_config.debug_options().xla_gpu_ftz());
-
+  
   // If ftz is enabled, set it as an attribute on every function in the module.
+  std::cout << "REZA: this is the value of "
+               "hlo_module_config.debug_options().xla_gpu_ftz() in "
+            << __FILE__ << "::" << __FUNCTION__
+            << hlo_module_config.debug_options().xla_gpu_ftz() << std::endl;
   if (hlo_module_config.debug_options().xla_gpu_ftz()) {
     for (llvm::Function& fn : *module) {
       fn.addFnAttr("denormal-fp-math-f32", "preserve-sign");
@@ -797,6 +805,10 @@ Status AMDGPUTargetModuleLinker(llvm::Module* module, GpuVersion gpu_version,
 
   // If ftz is enabled, set it as an attribute on every function in the module.
   //if (hlo_module_config.debug_options().xla_gpu_ftz()) {
+  std::cout << "REZA: this is the value of "
+               "hlo_module_config.debug_options().xla_gpu_ftz() in "
+            << __FILE__ << "::" << __FUNCTION__
+            << hlo_module_config.debug_options().xla_gpu_ftz() << std::endl;  
   if (1) {
     for (llvm::Function& fn : *module) {
       fn.addFnAttr("denormal-fp-math-f32", "preserve-sign");

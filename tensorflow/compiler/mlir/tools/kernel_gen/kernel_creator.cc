@@ -406,6 +406,8 @@ Status GenerateDeviceCode(mlir::ModuleOp module,
                           llvm::ArrayRef<std::string> architectures,
                           bool generate_fatbin, bool print_ptx,
                           bool enable_ftz) {
+  std::cout << "REZA: this is the value of enable_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << enable_ftz << std::endl;
   mlir::PassManager pm(module.getContext());
   applyTensorflowAndCLOptions(pm);
   mlir::registerLLVMDialectTranslation(*module->getContext());
@@ -444,6 +446,8 @@ StatusOr<mlir::OwningModuleRef> GenerateKernelForTfCode(
     llvm::ArrayRef<int64_t> tile_sizes, llvm::ArrayRef<int64_t> unroll_factors,
     bool embed_memref_prints, bool generate_fatbin, bool print_ptx,
     bool enable_ftz, bool cpu_codegen) {
+  std::cout << "REZA: this is the value of enable_ftz in " << __FILE__
+            << "::" << __FUNCTION__ << enable_ftz << std::endl;
   mlir::DialectRegistry registry;
   mlir::RegisterAllTensorFlowDialects(registry);
   registry.insert<mlir::chlo::HloClientDialect, mlir::mhlo::MhloDialect>();
